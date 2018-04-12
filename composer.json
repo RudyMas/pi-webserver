@@ -1,0 +1,53 @@
+{
+  "name": "easymvc/easymvc",
+  "description": "EasyMVC PHP Framework with Mobile App support",
+  "type": "project",
+  "keywords": [
+    "MVC",
+    "Framework",
+    "PHP",
+    "Angular"
+  ],
+  "license": "GPL-3.0",
+  "authors": [
+    {
+      "name": "Rudy Mas",
+      "email": "rudy.mas@rmssoft.be",
+      "homepage": "http://www.rmsoft.be",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "support@rmsoft.be",
+    "source": "https://github.com/RudyMas/easymvc"
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=7.1",
+    "easymvc/router": "^1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Controllers\\": "src/Controllers",
+      "Helpers\\": "src/Helpers",
+      "Models\\": "src/Models",
+      "Repositories\\": "src/Repositories",
+      "Tests\\": "Tests",
+      "Views\\": "src/Views"
+    }
+  },
+  "scripts": {
+    "post-update-cmd": [
+      "composer dump-autoload -o --no-dev",
+      "npm update --save"
+    ]
+  },
+  "config": {
+    "preferred-install": {
+      "*": "dist"
+    }
+  }
+}
