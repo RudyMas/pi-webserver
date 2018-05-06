@@ -1,11 +1,11 @@
 <?php
-define('VERSION', '1.2.1');
+define('VERSION', '&alpha;0.1.0');
 
 /**
  * Set this to true of you are going to use a database in your project
  * You can configure your database(s) in the config/database.php file
  */
-define('USE_DATABASE', false);
+define('USE_DATABASE', true);
 
 /**
  * Set USE_LOGIN to true if you want to use the EasyMVC login system

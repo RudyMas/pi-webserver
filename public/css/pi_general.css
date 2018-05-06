@@ -1,0 +1,16 @@
+header {
+    background-color: lightskyblue;
+    padding: 5px;
+}
+
+header img {
+    float: left;
+    margin-right: 25px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-right: 25px;
+}

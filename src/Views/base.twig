@@ -8,12 +8,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="revisit-after" content="7 days">
         <meta name="author" content="Rudy Mas">
-        <meta name="contact" content="rudy.mas@rudymas.be">
-        <meta name="keywords" content="EasyMVC, example, page">
-        <meta name="description" content="Example of a TWIG page">
+        <meta name="contact" content="rudy.mas@rmsoft.be">
+        <meta name="keywords" content="raspberry, pi, cms, rmsoft">
+        <meta name="description" content="Raspberry Pi CMS from RMsoft.be">
         <meta name="robots" content="index,follow">
         <meta name="rating" content="General">
-        <title>{% block title %}EasyMVC Twig{% endblock %}</title>
+        <title>{% block title %}Raspberry Pi CMS{% endblock %}</title>
     {% endblock %}
     {% block jvscript %}
         <script>
@@ -29,6 +29,8 @@
     {% endblock %}
 </head>
 <body>
-<div id="container">{% block container %}{% endblock %}</div>
+<div id="container" class="container-fluid">
+    {% block container %}{% endblock %}
+</div>
 </body>
 </html>

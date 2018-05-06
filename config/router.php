@@ -38,15 +38,8 @@
  *      'web|api' : Every call to the website will always be handled by the website. (Website or API)
  *      'mobile' : Every call to the website will always be handled by the mobile app (URL info will be transferred to the App)
  */
-$router->addRoute('GET', '/', 'EmvcHelp:welcome');
+$router->addRoute('GET', '/help', 'EmvcHelp:welcome');
 
-$router->addRoute('GET', '/mobile', '', [], [], 'mobile');
-$router->addRoute('GET', '/dashboard', '', [], [], 'mobile');
-$router->addRoute('GET', '/heroes', '', [], [], 'mobile');
+$router->addRoute('GET', '/websites', 'WebServer:index');
 
-$router->setDefault('/');
-
-$router->setMobileDetection(true); // Comment this line if you don't provide a Mobile App (Angular, REACT, ...)
-// $router->setDefaultMobileApp('http://m.website.com'); // Uncomment this when you want a different path to your mobile app
-
-/** End of File: router.php **/
+$router->setDefault('/websites');
