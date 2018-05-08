@@ -22,7 +22,11 @@
                     <th style="width: 45%">Website</th>
                     <th style="width: 15%" class="text-center">Active</th>
                     <th style="width: 15%" class="text-center">SSL support</th>
-                    <th style="width: 15%" class="text-center"></th>
+                    <th style="width: 15%" class="text-center">
+                        <button type="button" class="btn-sm btn-default" data-toggle="modal" data-target="#modalAdd">
+                            <span class="oi oi-plus" title="Add Website"></span>
+                        </button>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,15 +35,17 @@
                         <td class="text-center">{{ website.id }}</td>
                         <td>{{ website.name }}</td>
                         <td class="text-center">
-                            <span class="emvc-badge-outline-success oi {% if website.active %}oi-check{% else %}oi-x {% endif %}"
+                            <span class="oi {% if website.active %}oi-check emvc-badge-outline-success{% else %}oi-x emvc-badge-outline-danger{% endif %}"
                                   title="Check"></span>
                         </td>
                         <td class="text-center">
-                            <span class="emvc-badge-outline-danger oi {% if website.https %}oi-check{% else %}oi-x {% endif %}"
+                            <span class="oi {% if website.https %}oi-check emvc-badge-outline-success{% else %}oi-x emvc-badge-outline-danger{% endif %}"
                                   title="Check"></span>
                         </td>
                         <td class="text-center">
-                            <button>Edit</button>
+                            <button class="btn-sm btn-default" data-toggle="modal" data-target="#modalEdit">
+                                <span class="oi oi-pencil" title="Edit Website"></span>
+                            </button>
                         </td>
                     </tr>
                 {% endfor %}
@@ -48,4 +54,42 @@
         </div>
     </div>
     {% include '_footer.twig' %}
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalAdd">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Website</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalEdit">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Website</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
