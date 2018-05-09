@@ -7,6 +7,7 @@
 {% block css %}
     {{ parent() }}
     <link href="{{ BASE_URL }}/node_modules/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="{{ BASE_URL }}/public/css/switch.css" rel="stylesheet">
     <link href="{{ BASE_URL }}/public/css/pi_general.css" rel="stylesheet">
 {% endblock %}
 {% block container %}
@@ -63,13 +64,47 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+                <form action="{{ BASE_URL }}/websites/add" method="post">
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label for="website" class="col-3 col-form-label">URL (core)</label>
+                            <div class="col-9">
+                                <input type="text" class="form-control" id="website" name="website" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="username" class="col-3 col-form-label">Username (FTP)</label>
+                            <div class="col-9">
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password" class="col-3 col-form-label">Password (FTP)</label>
+                            <div class="col-9">
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="confirmPassword" class="col-3 col-form-label">Confirm Password</label>
+                            <div class="col-9">
+                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-check row">
+                            <div class="col-10 offset-1 switch">
+                            <span class="switch">
+                                <input type="checkbox" class="form-check-input switch" id="https" name="https">
+                                <label for="https" class="form-check-label switch-sm">HTTPS</label>
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
