@@ -5,6 +5,8 @@ namespace Controllers;
 use EasyMVC\Controller\Controller;
 use Exception;
 use Helpers\PiHelper;
+use Repositories\WebsiteRepository;
+use RudyMas\FileManager\FileManager;
 
 /**
  * Class WebServerController
@@ -12,7 +14,6 @@ use Helpers\PiHelper;
  */
 class WebServerController extends Controller
 {
-    private $DB;
     private $PiHelper;
 
     /**
@@ -21,21 +22,34 @@ class WebServerController extends Controller
      */
     public function __construct(array $args)
     {
-        $Core = $args['Core'];
-        if (isset($Core->DB['DBconnect'])) $this->DB = $Core->DB['DBconnect'];
-        $this->PiHelper = new PiHelper($this->DB);
+        if (isset($args['PiHelper'])) $this->PiHelper = $args['PiHelper'];
+
+        // Remove when done coding
+        // $this->PiHelper = new PiHelper(new FileManager());
     }
 
     /**
+     * @param WebsiteRepository $websiteRepository
      * @throws Exception
      */
-    public function indexAction()
+    public function indexAction(WebsiteRepository $websiteRepository): void
     {
-        $listServers = $this->PiHelper->getListWebsites();
+        $websiteRepository->loadAllWebsites();
+        $websites = $websiteRepository->getAll();
         try {
-            $this->render('websites.overview.twig', ['websites' => $listServers], 'TWIG');
+            $this->render('websites.overview.twig', ['websites' => $websites], 'TWIG');
         } catch (Exception $e) {
             throw $e;
         }
+    }
+
+    public function addSiteAction(): void
+    {
+        if ($_POST['password'] == $_POST['confirmPassword']) {
+            $this->PiHelper->newFTPUser($_POST);
+            // $this->PiHelper->updateDNS($_POST);
+            // $this->PiHelper->newWebsite($_POST);
+        }
+        $this->redirect('/websites');
     }
 }

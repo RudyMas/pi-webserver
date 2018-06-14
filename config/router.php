@@ -38,8 +38,26 @@
  *      'web|api' : Every call to the website will always be handled by the website. (Website or API)
  *      'mobile' : Every call to the website will always be handled by the mobile app (URL info will be transferred to the App)
  */
-$router->addRoute('GET', '/help', 'EmvcHelp:welcome');
-
-$router->addRoute('GET', '/websites', 'WebServer:index');
+$router->addRoute(
+    'GET',
+    '/help',
+    'EmvcHelp:welcome'
+);
+$router->addRoute(
+    'GET',
+    '/websites',
+    'WebServer:index',
+    [],
+    ['Website']
+);
+$router->addRoute(
+    'POST',
+    '/websites/add',
+    'WebServer:addSite',
+    [
+        'PiHelper' => new \Helpers\PiHelper(new \RudyMas\FileManager\FileManager())
+    ],
+    ['Website']
+);
 
 $router->setDefault('/websites');

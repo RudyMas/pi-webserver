@@ -44,7 +44,7 @@ CREATE TABLE `websites` (
 
 INSERT INTO `websites` (`id`, `name`, `active`, `https`) VALUES
 (1, 'pi-webserver', 1, 0),
-(2, 'phpmyadmin', 1, 0);
+(2, 'phpmyadmin', 1, 1);
 
 --
 -- Indexes for dumped tables
