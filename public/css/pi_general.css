@@ -14,3 +14,7 @@ footer {
     right: 0;
     margin-right: 25px;
 }
+
+.content {
+    padding: 10px 5px;
+}

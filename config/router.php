@@ -59,5 +59,13 @@ $router->addRoute(
     ],
     ['Website']
 );
+$router->addRoute(
+    'POST',
+    '/reset',
+    'WebServer:resetServer',
+    [
+        'PiHelper' => new \Helpers\PiHelper(new \RudyMas\FileManager\FileManager())
+    ]
+);
 
 $router->setDefault('/websites');

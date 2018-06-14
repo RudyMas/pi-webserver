@@ -37,19 +37,37 @@ class WebServerController extends Controller
         $websiteRepository->loadAllWebsites();
         $websites = $websiteRepository->getAll();
         try {
-            $this->render('websites.overview.twig', ['websites' => $websites], 'TWIG');
+            $this->render('websites.overview.twig', ['websites' => $websites, 'passwordError' => false], 'TWIG');
         } catch (Exception $e) {
             throw $e;
         }
     }
 
-    public function addSiteAction(): void
+    /**
+     * @param WebsiteRepository $websiteRepository
+     * @throws Exception
+     */
+    public function addSiteAction(WebsiteRepository $websiteRepository): void
     {
-        if ($_POST['password'] == $_POST['confirmPassword']) {
-            $this->PiHelper->newFTPUser($_POST);
-            // $this->PiHelper->updateDNS($_POST);
-            // $this->PiHelper->newWebsite($_POST);
+        if ($_POST['password'] != $_POST['confirmPassword']) {
+            try {
+                $websiteRepository->loadAllWebsites();
+                $websites = $websiteRepository->getAll();
+                $this->render('websites.overview.twig', ['websites' => $websites, 'passwordError' => true], 'TWIG');
+            } catch (Exception $e) {
+                throw $e;
+            }
         }
-        $this->redirect('/websites');
+        //$this->PiHelper->newFTPUser($_POST);
+        //$this->PiHelper->updateDNS($_POST);
+        //$this->PiHelper->newWebsite($_POST);
+        $websiteRepository->loadAllWebsites();
+        $websites = $websiteRepository->getAll();
+        $this->render('websites.overview.twig', ['websites' => $websites, 'showResetModal' => true], 'TWIG');
+    }
+
+    public function resetServerAction(): void
+    {
+        print('Reset server!');
     }
 }

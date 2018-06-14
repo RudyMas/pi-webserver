@@ -1,6 +1,6 @@
 /*
 EasyMVC special CSS options
-Version 1.1.1
+Version 1.1.2
 */
 
 /* Layout */
@@ -28,7 +28,7 @@ Version 1.1.1
 .emvc-input {
     background-color: white;
     border: 1px solid darkgray;
-    border-radius: 1000px;
+    border-radius: 50%;
 }
 
 /* End Form Elements */
@@ -45,7 +45,7 @@ Version 1.1.1
 }
 
 .emvc-badge-pill {
-    border-radius: 1000px;
+    border-radius: 50%;
 }
 
 .emvc-label-primary,
