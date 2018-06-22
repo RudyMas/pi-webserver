@@ -19,11 +19,6 @@ class EmvcHelpController extends Controller
         $this->Core = $args['Core'];
         $bestand = new FileManager();
 
-        $sudo = shell_exec('sudo -l');
-        print('<pre>');
-        print($sudo);
-        print('</pre>');
-
         shell_exec('sudo chmod 660 /etc/pure-ftpd/pureftpd.passwd');
         $test = shell_exec('cat /etc/pure-ftpd/pureftpd.passwd 2>&1');
         print('<pre>');

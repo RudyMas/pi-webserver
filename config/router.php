@@ -55,7 +55,7 @@ $router->addRoute(
     '/websites/add',
     'WebServer:addSite',
     [
-        'PiHelper' => new \Helpers\PiHelper(new \RudyMas\FileManager\FileManager())
+        'PiHelper' => new \Helpers\PiHelper(new \RudyMas\FileManager\FileManager(), new \RudyMas\Manipulator\Text())
     ],
     ['Website']
 );
@@ -64,7 +64,7 @@ $router->addRoute(
     '/reset',
     'WebServer:resetServer',
     [
-        'PiHelper' => new \Helpers\PiHelper(new \RudyMas\FileManager\FileManager())
+        'PiHelper' => new \Helpers\PiHelper(new \RudyMas\FileManager\FileManager(), new \RudyMas\Manipulator\Text())
     ]
 );
 

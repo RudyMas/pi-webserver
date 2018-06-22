@@ -3,6 +3,7 @@
 namespace Helpers;
 
 use RudyMas\FileManager\FileManager;
+use RudyMas\Manipulator\Text;
 
 /**
  * Class PiHelper
@@ -11,14 +12,17 @@ use RudyMas\FileManager\FileManager;
 class PiHelper
 {
     private $fileManager;
+    private $text;
 
     /**
      * PiHelper constructor.
      * @param FileManager $fileManager
+     * @param Text $text
      */
-    public function __construct(FileManager $fileManager)
+    public function __construct(FileManager $fileManager, Text $text)
     {
         $this->fileManager = $fileManager;
+        $this->text = $text;
     }
 
     /**
@@ -65,18 +69,49 @@ class PiHelper
     }
 
     /**
+     * Adding new FTP user to Pure-FTPd database
+     *
      * @param array $post
+     * @return bool
      */
-    public function newFTPUser(array $post): void
+    public function newFTPUser(array $post): bool
     {
-        $password = crypt($post['password'], 'azerty');
-        $command = "sudo pure-pw useradd {$post['website']} -u ftpuser -g ftpgroup -d /mnt/exhdd1/wwwroot/{$post['website']} -m";
-        print($command);
-        exit;
-        $test = shell_exec($command);
-        print($test);
-        exit;
-        shell_exec('sudo pure-pw mkdb');
+        $return = true;
+        exec('sudo chmod 606 /etc/pure-ftpd/pureftpd.passwd');
+
+        $ftpPasswordFile = $this->fileManager->loadLittleFile('/etc/pure-ftpd/pureftpd.passwd');
+        $lines = array_filter(explode(PHP_EOL, $ftpPasswordFile), 'strlen');
+        $data = [];
+        foreach ($lines as $line) {
+            $data[] = explode(':', $line);
+        }
+
+        $key = array_search($post['website'], array_column($data, 0));
+        if ($key == '') {
+            $salt = '$6$' . $this->text->randomText(16) . '$';
+            $password = crypt($post['password'], $salt);
+            $data[] = [$post['website'], $password, 33, 33, '', '/wwwroot/' . $post['website'] . '/./', '', '', '', '', '', '', '', '', '', '', '', ''];
+
+        } else {
+            $return = false;
+        }
+
+        if (true === $return) {
+            $output = '';
+            foreach ($data as $value) {
+                $output .= $value[0];
+                for ($x = 1; $x < 18; $x++) {
+                    $output .= ':' . $value[$x];
+                }
+                $output .= PHP_EOL;
+            }
+            $this->fileManager->saveLittleFile($output, '/etc/pure-ftpd/pureftpd.passwd');
+            exec('sudo pure-pw mkdb');
+        }
+
+        exec('sudo chmod 600 /etc/pure-ftpd/pureftpd.passwd');
+
+        return $return;
     }
 
     /**
@@ -110,8 +145,7 @@ class PiHelper
      */
     public function resetServer(): void
     {
-        shell_exec('sudo service pure-ftpd restart');
-        shell_exec('sudo service dnsmasq restart');
-        shell_exec('sudo service apache2 restart');
+        shell_exec('sudo systemctl restart dnsmasq');
+        shell_exec('sudo systemctl reload apache2');
     }
 }

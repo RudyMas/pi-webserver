@@ -7,6 +7,7 @@ use Exception;
 use Helpers\PiHelper;
 use Repositories\WebsiteRepository;
 use RudyMas\FileManager\FileManager;
+use RudyMas\Manipulator\Text;
 
 /**
  * Class WebServerController
@@ -25,7 +26,7 @@ class WebServerController extends Controller
         if (isset($args['PiHelper'])) $this->PiHelper = $args['PiHelper'];
 
         // Remove when done coding
-        // $this->PiHelper = new PiHelper(new FileManager());
+        $this->PiHelper = new PiHelper(new FileManager(), new Text());
     }
 
     /**
@@ -58,7 +59,7 @@ class WebServerController extends Controller
                 throw $e;
             }
         }
-        //$this->PiHelper->newFTPUser($_POST);
+        $this->PiHelper->newFTPUser($_POST);
         //$this->PiHelper->updateDNS($_POST);
         //$this->PiHelper->newWebsite($_POST);
         $websiteRepository->loadAllWebsites();
