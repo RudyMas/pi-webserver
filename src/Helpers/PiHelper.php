@@ -2,6 +2,9 @@
 
 namespace Helpers;
 
+use EasyMVC\Controller\Controller;
+use Models\Website;
+use Repositories\WebsiteRepository;
 use RudyMas\FileManager\FileManager;
 use RudyMas\Manipulator\Text;
 
@@ -23,6 +26,66 @@ class PiHelper
     {
         $this->fileManager = $fileManager;
         $this->text = $text;
+    }
+
+    /**
+     * Adding new website to database
+     *
+     * @param array $post
+     * @param WebsiteRepository $websiteRepository
+     * @return bool
+     */
+    public function addNewWebsiteToDatabase(array $post, WebsiteRepository $websiteRepository): bool
+    {
+        $newWebsite = new Website(0, $post['website'], true, (isset($post['https'])) ? true : false);
+        return $websiteRepository->saveNewWebsite($newWebsite);
+    }
+
+    /**
+     * Adding new FTP user to Pure-FTPd database
+     *
+     * @param array $post
+     * @return bool
+     */
+    public function newFTPUser(array $post): bool
+    {
+        return true;
+        $return = true;
+        exec('sudo chmod 606 /etc/pure-ftpd/pureftpd.passwd');
+
+        $ftpPasswordFile = $this->fileManager->loadLittleFile('/etc/pure-ftpd/pureftpd.passwd');
+        $lines = array_filter(explode(PHP_EOL, $ftpPasswordFile), 'strlen');
+        $data = [];
+        foreach ($lines as $line) {
+            $data[] = explode(':', $line);
+        }
+
+        $key = array_search($post['website'], array_column($data, 0));
+        if ($key == '') {
+            $salt = '$6$' . $this->text->randomText(16) . '$';
+            $password = crypt($post['password'], $salt);
+            $data[] = [$post['website'], $password, 33, 33, '', '/wwwroot/' . $post['website'] . '/./', '', '', '', '', '', '', '', '', '', '', '', ''];
+
+        } else {
+            $return = false;
+        }
+
+        if (true === $return) {
+            $output = '';
+            foreach ($data as $value) {
+                $output .= $value[0];
+                for ($x = 1; $x < 18; $x++) {
+                    $output .= ':' . $value[$x];
+                }
+                $output .= PHP_EOL;
+            }
+            $this->fileManager->saveLittleFile($output, '/etc/pure-ftpd/pureftpd.passwd');
+            exec('sudo pure-pw mkdb');
+        }
+
+        exec('sudo chmod 600 /etc/pure-ftpd/pureftpd.passwd');
+
+        return $return;
     }
 
     /**
@@ -66,52 +129,6 @@ class PiHelper
         }
 
         shell_exec('sudo cp phpinfo.php ' . $folder . '/index.php');
-    }
-
-    /**
-     * Adding new FTP user to Pure-FTPd database
-     *
-     * @param array $post
-     * @return bool
-     */
-    public function newFTPUser(array $post): bool
-    {
-        $return = true;
-        exec('sudo chmod 606 /etc/pure-ftpd/pureftpd.passwd');
-
-        $ftpPasswordFile = $this->fileManager->loadLittleFile('/etc/pure-ftpd/pureftpd.passwd');
-        $lines = array_filter(explode(PHP_EOL, $ftpPasswordFile), 'strlen');
-        $data = [];
-        foreach ($lines as $line) {
-            $data[] = explode(':', $line);
-        }
-
-        $key = array_search($post['website'], array_column($data, 0));
-        if ($key == '') {
-            $salt = '$6$' . $this->text->randomText(16) . '$';
-            $password = crypt($post['password'], $salt);
-            $data[] = [$post['website'], $password, 33, 33, '', '/wwwroot/' . $post['website'] . '/./', '', '', '', '', '', '', '', '', '', '', '', ''];
-
-        } else {
-            $return = false;
-        }
-
-        if (true === $return) {
-            $output = '';
-            foreach ($data as $value) {
-                $output .= $value[0];
-                for ($x = 1; $x < 18; $x++) {
-                    $output .= ':' . $value[$x];
-                }
-                $output .= PHP_EOL;
-            }
-            $this->fileManager->saveLittleFile($output, '/etc/pure-ftpd/pureftpd.passwd');
-            exec('sudo pure-pw mkdb');
-        }
-
-        exec('sudo chmod 600 /etc/pure-ftpd/pureftpd.passwd');
-
-        return $return;
     }
 
     /**
