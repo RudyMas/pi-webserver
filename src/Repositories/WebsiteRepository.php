@@ -35,7 +35,7 @@ class WebsiteRepository extends Repository
      */
     public function saveNewWebsite(Website $website): bool
     {
-        if ($this->checkIfWebsiteNotExists($website)) {
+        if ($this->checkIfWebsiteNotExist($website)) {
             $prepare = 'INSERT INTO websites VALUES (:id, :name, :active, :https)';
             $insertWebsite = $this->db->prepare($prepare);
             $insertWebsite->bindValue(':id', $website->getId(), \PDO::PARAM_INT);
@@ -54,7 +54,7 @@ class WebsiteRepository extends Repository
      * @param Website $website
      * @return bool
      */
-    private function checkIfWebsiteNotExists(Website $website): bool
+    private function checkIfWebsiteNotExist(Website $website): bool
     {
         $prepare = 'SELECT id FROM websites WHERE name = :name';
         $checkWebsite = $this->db->prepare($prepare);

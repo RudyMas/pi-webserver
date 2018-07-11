@@ -1,6 +1,38 @@
+/* Preparing CSS Grid Layout */
+header {
+    grid-area: header;
+    position: sticky;
+    top: 0;
+}
+
+footer {
+    grid-area: footer;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.content {
+    grid-area: content;
+    padding: 20px 5px 80px;
+}
+
+#container {
+    display: grid;
+    grid-template-rows: max-content auto max-content;
+    grid-template-columns: auto minmax(auto, 1000px) auto;
+    grid-template-areas:
+        "header header header"
+        ". content ."
+        "footer footer footer";
+}
+
+/* Adding Design to specific html-elements */
 header {
     background-color: lightskyblue;
-    padding: 5px;
+    padding: 10px;
+    z-index: 50;
 }
 
 header img {
@@ -9,12 +41,16 @@ header img {
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin-right: 25px;
+    padding: 5px 20px;
+    background-color: midnightblue;
+    color: white;
+    text-align: right;
 }
 
-.content {
-    padding: 10px 5px;
+footer a {
+    color: yellow;
+}
+
+footer a:hover {
+    color: red;
 }

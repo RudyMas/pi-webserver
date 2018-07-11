@@ -45,6 +45,12 @@ class EmvcHelpController extends Controller
         $output .= "fe80::2\t\tpi-webserver phpmyadmin rmfoto rmsoft\n";
         $bestand->saveLittleFile($output, '/etc/dnsmasq_hosts.conf');
         // $test = shell_exec('sudo service dnsmasq restart 2>&1');
+
+        // Showing Pi temperature
+        $f = fopen("/sys/class/thermal/thermal_zone0/temp","r");
+        $temp = fgets($f);
+        echo 'SoC temperature is '.round($temp/1000);
+        fclose($f);
     }
 
     public function welcomeAction()

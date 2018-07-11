@@ -1,7 +1,46 @@
 /*
 EasyMVC special CSS options
-Version 1.1.2
+Version 1.2.1
 */
+
+/* Reset margin & padding for all html-alements */
+* {
+    padding: 0;
+    margin: 0;
+}
+/* End Reset margin & padding for all html-alements */
+
+/* EasyMVC Background */
+#bgtopleft, #bgbottomright {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
+
+#bgtopleft {
+    background-color: #8892bf;
+    clip-path: polygon(0 0, 95% 0, 30% 30%, 0 95%);
+    z-index: -1;
+}
+
+#bgbottomright {
+    background-color: #dd0031;
+    clip-path: polygon(100% 100%, 100% 5%, 70% 70%, 5% 100%);
+    z-index: -2;
+}
+/* End EasyMVC Background */
+
+/* Changing normal behavior html-elements */
+button {
+    cursor: pointer;
+}
+/* End Changing normal behavior html-elements */
+
+/* Background Colors Elements */
+.background {
+    background-color: #fff!important;
+}
+/* End Background Colors Elements */
 
 /* Layout */
 .emvc-center-element {
@@ -20,20 +59,17 @@ Version 1.1.2
         transform: none;
     }
 }
-
 /* End Layout */
 
 /* Form Elements */
-
 .emvc-input {
     background-color: white;
     border: 1px solid darkgray;
     border-radius: 50%;
 }
-
 /* End Form Elements */
 
-/* Labels */
+/* Labels / Badges */
 .emvc-label,
 .emvc-badge {
     display: inline-block;
@@ -161,16 +197,19 @@ Version 1.1.2
 .emvc-badge-outline-inverse {
     border-color: black;
 }
-
-/* End Labels */
+/* End Labels / Badges */
 
 /* Clearing Floats */
-
 .emvc-clearfix:before,
 .emvc-clearfix:after {
     content: "";
     display: table;
     clear: both;
 }
-
 /* End Clearing Floats */
+
+/* Testing CSS */
+.test_border {
+    border: 2px solid red;
+}
+/* ENd Testing CSS */
