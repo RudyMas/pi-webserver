@@ -14,7 +14,6 @@
         </tr>
         </thead>
         <tbody>
-        {% for x in 0..9 %}
         {% for website in websites %}
             <tr>
                 <td class="text-center">{{ website.id }}</td>
@@ -33,7 +32,6 @@
                     </button>
                 </td>
             </tr>
-        {% endfor %}
         {% endfor %}
         </tbody>
     </table>

@@ -13,6 +13,9 @@
         <meta name="description" content="Raspberry Pi CMS from RMsoft.be">
         <meta name="robots" content="index,follow">
         <meta name="rating" content="General">
+        {% if redirect %}
+            <meta http-equiv="refresh" content="{{ redirect.sleep }};url={{ BASE_URL }}{{ redirect.page }}">
+        {% endif %}
         <title>{% block title %}Raspberry Pi CMS{% endblock %}</title>
     {% endblock %}
     {% block jvscript %}

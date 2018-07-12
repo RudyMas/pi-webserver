@@ -55,17 +55,26 @@ class WebServerController extends Controller
             $websites = $websiteRepository->getAll();
             $this->render('websites.overview.twig', ['websites' => $websites, 'duplicateError' => true], 'TWIG');
         } else {
-            $this->PiHelper->newFTPUser($_POST);
-            //$this->PiHelper->updateDNS($_POST);
-            //$this->PiHelper->newWebsite($_POST);
+            if ($this->PiHelper->newFTPUser($_POST)) {
+                $this->PiHelper->newWebsite($_POST);
+                //$this->PiHelper->updateDNS($_POST);
+            }
             $websiteRepository->loadAllWebsites();
             $websites = $websiteRepository->getAll();
             $this->render('websites.overview.twig', ['websites' => $websites, 'showResetModal' => true], 'TWIG');
         }
     }
 
+    /**
+     * @throws \Exception
+     */
     public function resetServerAction(): void
     {
-        print('Reset server!');
+        $redirect = [
+            'sleep' => 5,
+            'page' => '/websites'
+        ];
+        $this->render('index.twig', ['redirect' => $redirect], 'TWIG');
+        $this->PiHelper->resetServer();
     }
 }
