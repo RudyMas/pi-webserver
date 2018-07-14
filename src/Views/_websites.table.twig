@@ -2,8 +2,7 @@
     <table class="table table-striped table-bordered background">
         <thead class="thead-dark">
         <tr>
-            <th style="width: 10%" class="text-center">#</th>
-            <th style="width: 45%">Website</th>
+            <th style="width: 55%">Website</th>
             <th style="width: 15%" class="text-center">Active</th>
             <th style="width: 15%" class="text-center">SSL support</th>
             <th style="width: 15%" class="text-center">
@@ -16,7 +15,6 @@
         <tbody>
         {% for website in websites %}
             <tr>
-                <td class="text-center">{{ website.id }}</td>
                 <td>{{ website.name }}</td>
                 <td class="text-center">
                             <span class="oi {% if website.active %}oi-check emvc-badge-outline-success{% else %}oi-x emvc-badge-outline-danger{% endif %}"
