@@ -37,7 +37,6 @@ class PiHelper
      */
     public function addNewWebsiteToDatabase(array $post, WebsiteRepository $websiteRepository): bool
     {
-        return true;
         $newWebsite = new Website(0, $post['website'], true, (isset($post['https'])) ? true : false);
         return $websiteRepository->saveNewWebsite($newWebsite);
     }
@@ -50,7 +49,6 @@ class PiHelper
      */
     public function newFTPUser(array $post): bool
     {
-        return true;
         $return = true;
         exec('sudo chmod 606 /etc/pure-ftpd/pureftpd.passwd');
 
@@ -94,7 +92,6 @@ class PiHelper
      */
     public function newWebsite(array $post): void
     {
-        return;
         $output = "<VirtualHost *:80>\n";
         $output .= "\tServerName {$post['website']}.local\n";
         $output .= "\tServerAdmin webmaster@localhost\n";
@@ -131,29 +128,29 @@ class PiHelper
     }
 
     /**
-     * @param array|null $post
+     * @param WebsiteRepository $websiteRepository
      */
-    public function updateDNS(array $post = null): void
+    public function updateDNS(WebsiteRepository $websiteRepository): void
     {
-        if ($post !== null) {
-            if (isset($post['https'])) $https = true; else $https = false;
-            $query = "INSERT INTO websites VALUES (0, {$post['website']}, TRUE, $https)";
-            $this->db->insert($query);
-        }
+        $websiteRepository->loadAllWebsites();
+        $websites = $websiteRepository->getAll();
 
-        $listWebsites = $this->getListWebsites();
-
-        $outputIPv4 = "192.168.0.2\t";
-        $outputIPv6 = "fe80::2\t";
-        foreach ($listWebsites as $listWebsite) {
-            $outputIPv4 .= "$listWebsite ";
-            $outputIPv6 .= "$listWebsite ";
+        $outputIPv4 = "192.168.0.2";
+        $outputIPv6 = "fe80::2";
+        foreach ($websites as $website) {
+            $outputIPv4 .= " {$website->getName()}";
+            $outputIPv6 .= " {$website->getName()}";
         }
         $outputIPv4 .= "\n";
         $outputIPv6 .= "\n";
 
         $output = $outputIPv4 . $outputIPv6;
+
+        exec('sudo chmod 646 /etc/dnsmasq_hosts.conf');
         $this->fileManager->saveLittleFile($output, '/etc/dnsmasq_hosts.conf');
+        exec('sudo chmod 644 /etc/dnsmasq_hosts.conf');
+
+        $websiteRepository->clearData();
     }
 
     /**
@@ -161,7 +158,6 @@ class PiHelper
      */
     public function resetServer(): void
     {
-        exec('sudo systemctl restart dnsmasq');
-        exec('sudo systemctl reload apache2');
+        exec('sudo systemctl restart dnsmasq && sudo systemctl reload apache2');
     }
 }

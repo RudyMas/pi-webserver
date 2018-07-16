@@ -57,7 +57,7 @@ class WebServerController extends Controller
         } else {
             if ($this->PiHelper->newFTPUser($_POST)) {
                 $this->PiHelper->newWebsite($_POST);
-                //$this->PiHelper->updateDNS($_POST);
+                $this->PiHelper->updateDNS($websiteRepository);
             }
             $websiteRepository->loadAllWebsites();
             $websites = $websiteRepository->getAll();

@@ -28,6 +28,17 @@ class WebsiteRepository extends Repository
     }
 
     /**
+     * Loading website data by id
+     *
+     * @param int $id
+     */
+    public function loadWebsiteById(int $id): void
+    {
+        $sql = 'SELECT * FROM websites WHERE id = :id';
+        parent::loadAllFromTableByQuery('Website', $sql, [':id' => $id]);
+    }
+
+    /**
      * Saving the new website to the database
      *
      * @param Website $website
