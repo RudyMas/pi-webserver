@@ -49,12 +49,9 @@ class WebServerController extends Controller
             $websiteRepository->loadAllWebsites();
             $websites = $websiteRepository->getAll();
             $this->render('websites.overview.twig', ['websites' => $websites, 'passwordError' => true], 'TWIG');
+            return;
         }
-        if (!$this->PiHelper->addNewWebsiteToDatabase($_POST, $websiteRepository)) {
-            $websiteRepository->loadAllWebsites();
-            $websites = $websiteRepository->getAll();
-            $this->render('websites.overview.twig', ['websites' => $websites, 'duplicateError' => true], 'TWIG');
-        } else {
+        if ($this->PiHelper->addNewWebsiteToDatabase($_POST, $websiteRepository)) {
             if ($this->PiHelper->newFTPUser($_POST)) {
                 $this->PiHelper->newWebsite($_POST);
                 $this->PiHelper->updateDNS($websiteRepository);
@@ -62,6 +59,10 @@ class WebServerController extends Controller
             $websiteRepository->loadAllWebsites();
             $websites = $websiteRepository->getAll();
             $this->render('websites.overview.twig', ['websites' => $websites, 'showResetModal' => true], 'TWIG');
+        } else {
+            $websiteRepository->loadAllWebsites();
+            $websites = $websiteRepository->getAll();
+            $this->render('websites.overview.twig', ['websites' => $websites, 'duplicateError' => true], 'TWIG');
         }
     }
 
@@ -74,7 +75,7 @@ class WebServerController extends Controller
             'sleep' => 5,
             'page' => '/websites'
         ];
-        $this->render('index.twig', ['redirect' => $redirect], 'TWIG');
+        $this->render('websites.resetServer.twig', ['redirect' => $redirect], 'TWIG');
         $this->PiHelper->resetServer();
     }
 }

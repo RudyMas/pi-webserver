@@ -2,7 +2,6 @@
 
 namespace Helpers;
 
-use EasyMVC\Controller\Controller;
 use Models\Website;
 use Repositories\WebsiteRepository;
 use RudyMas\FileManager\FileManager;
@@ -88,6 +87,8 @@ class PiHelper
     }
 
     /**
+     * Creating Apache config file for specific website
+     *
      * @param array $post
      */
     public function newWebsite(array $post): void
@@ -128,6 +129,8 @@ class PiHelper
     }
 
     /**
+     * Updating de hosts file for dnsmasq
+     *
      * @param WebsiteRepository $websiteRepository
      */
     public function updateDNS(WebsiteRepository $websiteRepository): void
@@ -158,6 +161,7 @@ class PiHelper
      */
     public function resetServer(): void
     {
-        exec('sudo systemctl restart dnsmasq && sudo systemctl reload apache2');
+        exec('sudo systemctl restart dnsmasq');
+        exec('sudo systemctl reload apache2');
     }
 }
