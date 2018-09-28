@@ -94,7 +94,7 @@ class PiHelper
     public function newWebsite(array $post): void
     {
         $output = "<VirtualHost *:80>\n";
-        $output .= "\tServerName {$post['website']}.local\n";
+        $output .= "\tServerName {$post['website']}.lan\n";
         $output .= "\tServerAdmin webmaster@localhost\n";
         $output .= "\tDocumentRoot /wwwroot/{$post['website']}\n";
         $output .= "\tErrorLog \${APACHE_LOG_DIR}/error.log\n";
@@ -102,7 +102,7 @@ class PiHelper
         $output .= "</VirtualHost>\n";
         if (isset($post['https'])) {
             $output .= "\n<VirtualHost *:443>\n";
-            $output .= "\tServerName {$post['website']}.local\n";
+            $output .= "\tServerName {$post['website']}.lan\n";
             $output .= "\tServerAdmin webmaster@localhost\n";
             $output .= "\tDocumentRoot /wwwroot/{$post['website']}\n";
             $output .= "\tErrorLog \${APACHE_LOG_DIR}/error.log\n";
@@ -112,12 +112,12 @@ class PiHelper
             $output .= "</VirtualHost>\n";
         }
 
-        $filename = "/etc/apache2/sites-available/{$post['website']}.local.conf";
+        $filename = "/etc/apache2/sites-available/{$post['website']}.lan.conf";
         exec('sudo touch ' . $filename);
         exec('sudo chmod 646 ' . $filename);
         $this->fileManager->saveLittleFile($output, $filename);
         exec('sudo chmod 644 ' . $filename);
-        exec('sudo a2ensite ' . $post['website'] . '.local');
+        exec('sudo a2ensite ' . $post['website'] . '.lan');
 
         $folder = "/wwwroot/{$post['website']}";
         if (!is_dir($folder)) {
