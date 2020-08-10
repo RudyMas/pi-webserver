@@ -10,7 +10,7 @@
  * @version 1.0.2
  */
 define('SERVER_DEVELOP', 'localhost');
-define('SERVER_PRODUCTION', 'example.com');
+define('SERVER_PRODUCTION', 'webserver.test.lan');
 
 /**
  * Define the time_zone the server should work on
