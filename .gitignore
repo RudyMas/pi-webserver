@@ -1,8 +1,8 @@
 # EasyMVC specific restrictions
 
-/config/config.php
+#/config/config.php
 /config/config.local.php
-/config/database.php
+#/config/database.php
 /config/database.local.php
 
 # End EasyMVC specific restrictions
