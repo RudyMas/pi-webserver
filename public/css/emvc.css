@@ -1,216 +1,311 @@
 /*
 EasyMVC special CSS options
-Version 1.2.7
+Version 1.2.13 (SCSS-version)
 */
-
-/* EasyMVC Background */
 #bgtopleft, #bgbottomright, #bgmiddle {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-}
+  width: 100%;
+  height: 100%;
+  position: fixed; }
 
 #bgtopleft {
-    background-color: #8892bf;
-    clip-path: polygon(0 0, 95% 0, 30% 30%, 0 95%);
-    z-index: -2;
-}
+  background-color: #8892bf;
+  clip-path: polygon(0 0, 95% 0, 30% 30%, 0 95%);
+  z-index: -2; }
 
 #bgbottomright {
-    background-color: #dd0031;
-    clip-path: polygon(100% 100%, 100% 5%, 70% 70%, 5% 100%);
-    z-index: -2;
-}
+  background-color: #dd0031;
+  clip-path: polygon(100% 100%, 100% 5%, 70% 70%, 5% 100%);
+  z-index: -2; }
 
 #bgmiddle {
-    background-color: white;
-    clip-path: polygon(0 100%, 0 95%, 30% 30%, 95% 0, 100% 0, 100% 5%, 70% 70%, 5% 100%);
-    z-index: -1;
-}
-/* End EasyMVC Background */
+  background-color: #4f5b93;
+  clip-path: polygon(0 100%, 0 95%, 30% 30%, 95% 0, 100% 0, 100% 5%, 70% 70%, 5% 100%);
+  z-index: -1; }
 
-/* Changing normal behavior html-elements */
-button {
-    cursor: pointer;
-}
-/* End Changing normal behavior html-elements */
-
-/* Background Colors Elements */
-.background {
-    background-color: #fff!important;
-}
-/* End Background Colors Elements */
-
-/* Layout */
-.emvc-center-element {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-@media screen and (max-width: 768px) {
-    .emvc-center-element {
-        position: relative;
-        top: 10px;
-        left: 5%;
-        right: 5%;
-        width: 90%;
-        margin-bottom: 10px;
-        transform: none;
-    }
-}
-/* End Layout */
-
-/* Form Elements */
-.emvc-input {
-    background-color: white;
-    border: 1px solid darkgray;
+#versionBackButton {
+  position: absolute;
+  top: -12px;
+  right: -12px; }
+  #versionBackButton button {
+    font-size: 20px;
+    line-height: 10px;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
     border-radius: 1000px;
-}
-/* End Form Elements */
+    box-shadow: 0 0 0 1px black; }
+    #versionBackButton button:before {
+      content: "Close"; }
+    #versionBackButton button:hover {
+      background-color: darkgray;
+      color: black; }
 
-/* Labels / Badges */
-.emvc-label,
+button {
+  cursor: pointer; }
+
+.background {
+  background-color: white !important; }
+
+.background-white {
+  background-color: white !important; }
+
+.background-black {
+  background-color: black !important; }
+
+.background-inverse {
+  background-color: black !important; }
+
+.background-red {
+  background-color: red !important; }
+
+.background-green {
+  background-color: green !important; }
+
+.background-blue {
+  background-color: blue !important; }
+
+.background-yellow {
+  background-color: yellow !important; }
+
+.background-orange {
+  background-color: orange !important; }
+
+.background-purple {
+  background-color: purple !important; }
+
+.background-primary {
+  background-color: #007bff !important; }
+
+.background-secondary {
+  background-color: #868e96 !important; }
+
+.background-success {
+  background-color: #28a745 !important; }
+
+.background-danger {
+  background-color: #dc3545 !important; }
+
+.background-warning {
+  background-color: #ffc107 !important; }
+
+.background-info {
+  background-color: #17a2b8 !important; }
+
+.background-light {
+  background-color: #f8f9fa !important; }
+
+.background-dark {
+  background-color: #343a40 !important; }
+
+.emvc-center-element {
+  position: absolute;
+  color: black !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+@media screen and (max-width: 767.98px) {
+  .emvc-center-element {
+    position: page;
+    top: 30px;
+    left: 5%;
+    right: 5%;
+    transform: none; } }
+.emvc-input {
+  background-color: white;
+  border: 1px solid darkgray;
+  border-radius: 1000px; }
+
+.emvc-label {
+  display: inline-block;
+  border: 1px solid darkgray;
+  background-color: white;
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 2px 5px; }
+
 .emvc-badge {
-    display: inline-block;
-    border: 1px solid darkgray;
-    background-color: white;
-    border-radius: 5px;
-    margin-right: 5px;
-    padding: 2px 5px;
-}
+  display: inline-block;
+  border: 1px solid darkgray;
+  background-color: white;
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 2px 5px; }
 
 .emvc-badge-pill {
-    border-radius: 1000px;
-}
+  border-radius: 1000px; }
 
-.emvc-label-primary,
+.emvc-label-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white; }
+
 .emvc-badge-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: white;
-}
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white; }
 
-.emvc-label-outline-primary,
+.emvc-label-outline-primary {
+  border-color: #007bff;
+  color: #007bff; }
+
 .emvc-badge-outline-primary {
-    border-color: #007bff;
-    color: #007bff;
-}
+  border-color: #007bff;
+  color: #007bff; }
 
-.emvc-label-secondary,
+.emvc-label-secondary {
+  background-color: #868e96;
+  border-color: #868e96;
+  color: white; }
+
 .emvc-badge-secondary {
-    background-color: #868e96;
-    border-color: #868e96;
-    color: white;
-}
+  background-color: #868e96;
+  border-color: #868e96;
+  color: white; }
 
-.emvc-label-outline-secondary,
+.emvc-label-outline-secondary {
+  border-color: #868e96;
+  color: #868e96; }
+
 .emvc-badge-outline-secondary {
-    border-color: #868e96;
-    color: #868e96;
-}
+  border-color: #868e96;
+  color: #868e96; }
 
-.emvc-label-success,
+.emvc-label-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white; }
+
 .emvc-badge-success {
-    background-color: #28a745;
-    border-color: #28a745;
-    color: white;
-}
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white; }
 
-.emvc-label-outline-success,
+.emvc-label-outline-success {
+  border-color: #28a745;
+  color: #28a745; }
+
 .emvc-badge-outline-success {
-    border-color: #28a745;
-    color: #28a745;
-}
+  border-color: #28a745;
+  color: #28a745; }
 
-.emvc-label-danger,
+.emvc-label-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white; }
+
 .emvc-badge-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    color: white;
-}
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white; }
 
-.emvc-label-outline-danger,
+.emvc-label-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545; }
+
 .emvc-badge-outline-danger {
-    border-color: #dc3545;
-    color: #dc3545;
-}
+  border-color: #dc3545;
+  color: #dc3545; }
 
-.emvc-label-warning,
+.emvc-label-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: white; }
+
 .emvc-badge-warning {
-    background-color: #ffc107;
-    border-color: #ffc107;
-    color: white;
-}
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: white; }
 
-.emvc-label-outline-warning,
+.emvc-label-outline-warning {
+  border-color: #ffc107;
+  color: #ffc107; }
+
 .emvc-badge-outline-warning {
-    border-color: #ffc107;
-    color: #ffc107;
-}
+  border-color: #ffc107;
+  color: #ffc107; }
 
-.emvc-label-info,
+.emvc-label-info {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  color: white; }
+
 .emvc-badge-info {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-    color: white;
-}
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  color: white; }
 
-.emvc-label-outline-info,
+.emvc-label-outline-info {
+  border-color: #17a2b8;
+  color: #17a2b8; }
+
 .emvc-badge-outline-info {
-    border-color: #17a2b8;
-    color: #17a2b8;
-}
+  border-color: #17a2b8;
+  color: #17a2b8; }
 
-.emvc-label-light,
+.emvc-label-light {
+  background-color: #f8f9fa;
+  border-color: #f8f9fa; }
+
 .emvc-badge-light {
-    background-color: #f8f9fa;
-    border-color: #f8f9fa;
-}
+  background-color: #f8f9fa;
+  border-color: #f8f9fa; }
 
-.emvc-label-outline-light,
+.emvc-label-outline-light {
+  border-color: #f8f9fa; }
+
 .emvc-badge-outline-light {
-    border-color: #f8f9fa;
-}
+  border-color: #f8f9fa; }
 
-.emvc-label-dark,
+.emvc-label-dark {
+  background-color: #343a40;
+  border-color: #343a40;
+  color: white; }
+
 .emvc-badge-dark {
-    background-color: #343a40;
-    border-color: #343a40;
-    color: white;
-}
+  background-color: #343a40;
+  border-color: #343a40;
+  color: white; }
 
-.emvc-label-outline-dark,
+.emvc-label-outline-dark {
+  border-color: #343a40;
+  color: #343a40; }
+
 .emvc-badge-outline-dark {
-    border-color: #343a40;
-    color: #343a40;
-}
+  border-color: #343a40;
+  color: #343a40; }
 
-.emvc-label-inverse,
+.emvc-label-inverse {
+  background-color: black;
+  border-color: black;
+  color: white; }
+
 .emvc-badge-inverse {
-    background-color: black;
-    border-color: black;
-    color: white;
-}
+  background-color: black;
+  border-color: black;
+  color: white; }
 
-.emvc-label-outline-inverse,
+.emvc-label-outline-inverse {
+  border-color: black; }
+
 .emvc-badge-outline-inverse {
-    border-color: black;
-}
-/* End Labels / Badges */
+  border-color: black; }
 
-/* Clearing Floats */
-.emvc-clearfix:before,
+.emvc-clearfix:before {
+  content: "";
+  display: table;
+  clear: both; }
 .emvc-clearfix:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-/* End Clearing Floats */
+  content: "";
+  display: table;
+  clear: both; }
 
-/* CSS Used for Testing */
 .test_border {
-    border: 2px solid red;
-}
-/* End CSS Used for Testing */
+  border: 2px solid red; }
+
+.thead-darkgrey th {
+  color: white;
+  background-color: #343a40;
+  border-color: #343a40; }
+
+/*# sourceMappingURL=emvc.css.map */

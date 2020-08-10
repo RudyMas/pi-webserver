@@ -7,9 +7,9 @@
 $database[0]['objectName'] = 'DBconnect'; // Don't change this (EasyRouter uses this to inject Repositories)
 $database[0]['dbHost'] = 'localhost';
 $database[0]['port'] = '3306';
-$database[0]['dbUsername'] = 'pi-cms';
-$database[0]['dbPassword'] = 'admin';
-$database[0]['dbName'] = 'pi-cms';
+$database[0]['dbUsername'] = 'username';
+$database[0]['dbPassword'] = 'password';
+$database[0]['dbName'] = 'database_name';
 $database[0]['dbCharset'] = 'utf8';
 $database[0]['dbType'] = 'mysql';
 

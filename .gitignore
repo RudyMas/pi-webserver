@@ -1,3 +1,12 @@
+# EasyMVC specific restrictions
+
+/config/config.php
+/config/config.local.php
+/config/database.php
+/config/database.local.php
+
+# End EasyMVC specific restrictions
+
 # Created by https://www.gitignore.io/api/node,angular,composer,phpstorm+all,webstorm+all
 
 ### Angular ###

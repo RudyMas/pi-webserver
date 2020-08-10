@@ -4,7 +4,7 @@
  *
  * You can add routes like this:
  *
- * $router->addRoute('HTTP method',
+ * $Router->addRoute('HTTP method',
  *                   'Route to use',
  *                   'Controller[:Function]',
  *                   'Array of Classes to inject',
@@ -22,50 +22,65 @@
  *                     The Controller will receive 'Array of Classes, Array of Repositories, $var[], $html_body (JSON/XML/...)'
  *      - 'Controller:Function' -> This will load the class Controller and the Function inside the class
  *                              The Controller will receive 'Array of Classes'
- *                              The Function will receive 'Repository1, Repository2, RepositoryX..., $var[], $html_body (JSON/XML/...)'
+ *                              The Function will receive 'Repository1, Repository2, RepositoryX ..., $var[], $html_body (JSON/XML/...)'
  * - Array of Classes to inject: (OPTIONAL)
  *      This can be any class you want to pass on to the controller
  *      You can use the following syntax:
- *          ['DBconnect' => $DBconnect, 'someClass' => new SomeClass(), ...]
+ *          ['SomeClass' => new SomeClass(), 'OtherClass' => new OtherClass(), ...]
  * - Array of Repositories to inject: (OPTIONAL)
  *      This can be any repository you have created
  *          ['User', 'submap\Something', ...]
- *              'User' will inject the UserRepository into the Class/Function
- *              'submap\Something' will inject the SomethingRepository into the Class/Function located in the
+ *              'User' will inject the UserRepository into the Controller/Function
+ *              'submap\Something' will inject the SomethingRepository into the Controller/Function located in the
  *                  folder submap under src/Repositories
  * - Mobile Detection: ('auto', 'web', 'api', 'mobile') (OPTIONAL) (DEFAULT = auto)
  *      'auto' : Every call to the website will be checked. If a mobile device is detected, the mobile app will start
  *      'web|api' : Every call to the website will always be handled by the website. (Website or API)
  *      'mobile' : Every call to the website will always be handled by the mobile app (URL info will be transferred to the App)
  */
-$router->addRoute(
+
+/**
+ * You can delete the following three routes.
+ *
+ * These are used to demonstrate the mobile capabilities of the framework.
+ */
+$Router->addRoute(
     'GET',
-    '/help',
-    'EmvcHelp:welcome'
-);
-$router->addRoute(
-    'GET',
-    '/websites',
-    'WebServer:index',
+    '/mobile',
+    '',
     [],
-    ['Website']
+    [],
+    'mobile'
 );
-$router->addRoute(
-    'POST',
-    '/websites/add',
-    'WebServer:addSite',
-    [
-        'PiHelper' => new \Helpers\PiHelper(new \RudyMas\FileManager\FileManager(), new \RudyMas\Manipulator\Text())
-    ],
-    ['Website']
+$Router->addRoute(
+    'GET',
+    '/dashboard',
+    '',
+    [],
+    [],
+    'mobile'
 );
-$router->addRoute(
-    'POST',
-    '/reset',
-    'WebServer:resetServer',
-    [
-        'PiHelper' => new \Helpers\PiHelper(new \RudyMas\FileManager\FileManager(), new \RudyMas\Manipulator\Text())
-    ]
+$Router->addRoute(
+    'GET',
+    '/heroes',
+    '',
+    [],
+    [],
+    'mobile'
 );
 
-$router->setDefault('/websites');
+$Router->addRoute(
+    'GET',
+    '/version',
+    'version\Version:version'
+);
+$Router->setDefault('/version');
+
+/** Remove or comment the following line if you don't provide a separate Mobile App (Angular, REACT, ...) */
+$Router->setMobileDetection(true);
+
+/** Uncomment the next line is you have a special URL for your Mobike App. Default: http(s)://example.org/m/ */
+// $Router->setDefaultMobileApp('http://m.example.org');
+
+/** You can remove the following line if you want to disable the internal help for EasyMVC */
+include('router_emvc.php');

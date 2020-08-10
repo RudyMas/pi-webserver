@@ -1,14 +1,13 @@
 {
   "name": "easymvc",
-  "version": "1.2.1",
   "private": true,
   "description": "EasyMVC JavaScript Dependencies",
   "author": "Rudy Mas",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.1.2",
-    "jquery": "^3.3.1",
-    "open-iconic": "^1.1.1",
-    "popper.js": "^1.14.3"
+    "@angular/cli": "^10.0.5",
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
   }
 }
